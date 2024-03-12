@@ -55,9 +55,9 @@ public class NettyHeaderDelimiterFrameDecoder extends ByteToMessageDecoder {
         // 累积数据，直到包含两个头标识符，截取数据返回一个包
         if (startIndex > 0) {
             // 丢弃标识符左区间前的数据
-            buffer.skipBytes(startIndex);
+            buffer.skipBytes(startIndex/2);
         }
         // TODO 若后续没有数据，最后一个包将永远得不到处理
-        return buffer.readRetainedSlice(endIndex - startIndex);
+        return buffer.readRetainedSlice((endIndex - startIndex)/2);
     }
 }
